@@ -1,0 +1,24 @@
+{
+  "name": "fe2907",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcherepakha/fe2907.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcherepakha/fe2907/issues"
+  },
+  "homepage": "https://github.com/bcherepakha/fe2907#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-recommended": "^4.1.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
+  }
+}
