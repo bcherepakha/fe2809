@@ -5,61 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOSTED</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div>
+    <div class="header-info">
         Financing option available at checkout.
     </div>
-    <header>
-        <a href="/" title="BOOSTED main page">
-            <img src="img/Logo.svg" alt="">
+    <header class="header">
+        <a class="header__logo-link" href="/" title="BOOSTED main page">
+            <img class="header__logo-image" src="img/Logo.svg" alt="">
         </a>
-        <nav>
-            <ul>
-                <li>
-                    <a href="#">Electric Skateboards</a>
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li class="header__nav-list-item">
+                    <a class="header__nav-link" href="#">Electric Skateboards</a>
                 </li>
-                <li>
-                    <a href="#">Electric Scooters</a>
+                <li class="header__nav-list-item">
+                    <a class="header__nav-link" href="#">Electric Scooters</a>
                 </li>
-                <li>
-                    <a href="#">Accessories</a>
+                <li class="header__nav-list-item">
+                    <a class="header__nav-link" href="#">Accessories</a>
                 </li>
-                <li>
-                    <a href="#">Gift Card</a>
+                <li class="header__nav-list-item">
+                    <a class="header__nav-link" href="#">Gift Card</a>
                 </li>
-                <li>
-                    <a href="#">More Info</a>
+                <li class="header__nav-list-item">
+                    <a class="header__nav-link" href="#">More Info</a>
                 </li>
             </ul>
         </nav>
+        <div class="header__links">
+            <a class="header__link" href="#" title="profile">
+                <svg class="header__link-img" viewBox="0 0 18 18">
+                    <path d="M17.46 9C17.4601 7.60325 17.1142 6.22823 16.4534 4.99767C15.7927 3.76711 14.8375 2.71929 13.6732 1.94776C12.5088 1.17623 11.1716 0.704973 9.78082 0.576067C8.39003 0.447161 6.98896 0.664612 5.70267 1.20901C4.41638 1.75341 3.28489 2.60782 2.4092 3.69597C1.5335 4.78412 0.940854 6.07216 0.684148 7.44512C0.427442 8.81808 0.514667 10.2332 0.938036 11.5643C1.3614 12.8953 2.10775 14.1008 3.11044 15.0732C4.67848 16.5955 6.77548 17.4509 8.96091 17.4596C11.1463 17.4683 13.2501 16.6297 14.8302 15.12C14.8649 15.0972 14.8953 15.0686 14.9202 15.0354C15.7244 14.2494 16.3633 13.3105 16.7994 12.2741C17.2356 11.2376 17.4602 10.1245 17.46 9ZM9.00004 1.26C10.4969 1.26113 11.9612 1.69624 13.2158 2.51264C14.4704 3.32904 15.4613 4.49169 16.0686 5.85978C16.6758 7.22786 16.8734 8.74268 16.6373 10.2208C16.4012 11.6988 15.7417 13.0767 14.7384 14.1876C14.3402 13.3984 13.7827 12.7004 13.1011 12.1374C12.4195 11.5745 11.6287 11.159 10.7784 10.917C11.4835 10.5226 12.0378 9.90556 12.3545 9.16241C12.6713 8.41927 12.7326 7.59205 12.5288 6.81034C12.325 6.02863 11.8677 5.33659 11.2285 4.84263C10.5893 4.34868 9.80427 4.08071 8.99644 4.08071C8.18861 4.08071 7.4036 4.34868 6.76438 4.84263C6.12516 5.33659 5.66784 6.02863 5.46408 6.81034C5.26031 7.59205 5.3216 8.41927 5.63835 9.16241C5.9551 9.90556 6.50941 10.5226 7.21444 10.917C6.36397 11.159 5.57293 11.5747 4.89132 12.138C4.20971 12.7012 3.65234 13.3998 3.25444 14.1894C1.96375 12.7701 1.25211 10.9184 1.26004 9C1.26004 6.94722 2.0755 4.97852 3.52703 3.52699C4.97857 2.07546 6.94727 1.26 9.00004 1.26ZM9.00004 10.665C8.42023 10.665 7.85346 10.493 7.37144 10.1708C6.88942 9.84853 6.51383 9.39054 6.29219 8.85476C6.07056 8.31899 6.01284 7.72951 6.12635 7.16092C6.23986 6.59233 6.51949 6.07019 6.92985 5.66058C7.34022 5.25098 7.86287 4.97231 8.43167 4.85985C9.00046 4.74739 9.58984 4.80619 10.1252 5.02882C10.6606 5.25144 11.1179 5.62788 11.4392 6.11049C11.7606 6.5931 11.9315 7.16019 11.9304 7.74C11.9285 8.51611 11.619 9.2598 11.0697 9.80809C10.5204 10.3564 9.77615 10.6645 9.00004 10.665ZM3.80164 14.7312C4.2557 13.7335 4.98728 12.8875 5.90905 12.2942C6.83083 11.701 7.90386 11.3855 9.00004 11.3855C10.0962 11.3855 11.1693 11.701 12.091 12.2942C13.0128 12.8875 13.7444 13.7335 14.1984 14.7312C12.776 16.0245 10.9225 16.7411 9.00004 16.7411C7.07755 16.7411 5.22409 16.0245 3.80164 14.7312Z"/>
+                </svg>
+            </a>
+            <a class="header__link" href="#" title="basket">
+                <svg class="header__link-img" viewBox="0 0 18 13">
+                    <path d="M15.975 10.115L17.4312 3.6134C17.4693 3.44341 17.4686 3.26704 17.4293 3.09733C17.39 2.92763 17.3131 2.76891 17.2042 2.63292C17.0954 2.49693 16.9574 2.38714 16.8004 2.31165C16.6434 2.23617 16.4714 2.19692 16.2972 2.1968H4.94464L4.72144 1.1042C4.70461 1.02166 4.65937 0.947638 4.59359 0.895015C4.52781 0.842392 4.44566 0.814503 4.36144 0.816201H0.900039C0.804561 0.816201 0.712994 0.854129 0.645481 0.921642C0.577968 0.989156 0.540039 1.08072 0.540039 1.1762C0.540039 1.27168 0.577968 1.36325 0.645481 1.43076C0.712994 1.49827 0.804561 1.5362 0.900039 1.5362H4.07524L4.29844 2.6288L5.82844 10.1078L6.17224 11.78C6.18907 11.8625 6.23431 11.9366 6.30009 11.9892C6.36587 12.0418 6.44802 12.0697 6.53224 12.068H16.5816C16.6771 12.068 16.7687 12.0301 16.8362 11.9626C16.9037 11.895 16.9416 11.8035 16.9416 11.708C16.9416 11.6125 16.9037 11.521 16.8362 11.4534C16.7687 11.3859 16.6771 11.348 16.5816 11.348H6.81844L6.62224 10.3922H15.6222C15.7037 10.3928 15.783 10.3656 15.8471 10.3153C15.9112 10.2649 15.9563 10.1943 15.975 10.115ZM6.48004 9.6758L5.09224 2.9168H16.2972C16.3638 2.91646 16.4295 2.93117 16.4895 2.95983C16.5495 2.98849 16.6023 3.03036 16.6439 3.0823C16.6854 3.13425 16.7147 3.19492 16.7295 3.25977C16.7442 3.32462 16.7442 3.39198 16.7292 3.4568L15.3342 9.6758H6.48004Z"/>
+                </svg>
+            </a>
+        </div>
     </header>
 
-    <div>
-        <a href="#">
-            <img src="img/electrec.png" alt="electrec">
-        </a>
-        <a href="#" aria-label="Tech Crunch">
-            <img src="img/techCrunch.png" alt="">
-        </a>
-        <a href="#">
-            <img src="img/PopularMechanic.png" alt="Popular Mechanic">
-        </a>
-        <a href="#">
-            <img src="img/Wired.png" alt="Wired">
-        </a>
-    </div>
+    <section class="preamble">
+        <h1 class="preamble__title">
+            Welcome to Boosted USA
+        </h1>
+        <div class="preamble__description">
+            The Holy Grail of Electric Skateboards and One REVolutionary Scooter
+        </div>
 
-    <section>
-        <h1>Welcome to Boosted USA</h1>
-        <div>The Holy Grail of Electric Skateboards and One REVolutionary Scooter</div>
-
-        <div>
-            <a href="">BOOSTED REVS</a>
-            <a href="">BOOSTED BOARDS</a>
+        <div class="preamble__shops">
+            <a class="preamble__shop" href="">BOOSTED REVS</a>
+            <a class="preamble__shop" href="">BOOSTED BOARDS</a>
         </div>
     </section>
+
+    <div class="promo">
+        <div class="promo__wrapper">
+            <a href="#">
+                <img src="img/electrec.png" alt="electrec">
+            </a>
+            <a href="#" aria-label="Tech Crunch">
+                <img src="img/techCrunch.png" alt="">
+            </a>
+            <a href="#">
+                <img src="img/PopularMechanic.png" alt="Popular Mechanic">
+            </a>
+            <a href="#">
+                <img src="img/Wired.png" alt="Wired">
+            </a>
+        </div>
+    </div>
+
 
     <section>
         <h2>Looking for Boosted Boards, or Boosted Revs?</h2>

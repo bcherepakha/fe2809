@@ -1,0 +1,205 @@
+/* latin-ext */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/roboto/v29/KFOmCnqEu92Fr1Mu7GxKKTU1Kvnz.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/roboto/v29/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/roboto/v29/KFOlCnqEu92Fr1MmWUlfChc4AMP6lbBP.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/roboto/v29/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    /* html, body */
+    font-family: 'Roboto', sans-serif;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.26666667;
+
+    color: #000000;
+}
+
+body {
+    margin: 0;
+}
+
+.header-info {
+    background: #000000;
+
+    font-size: .8rem;
+    line-height: 1.25;
+
+    text-align: center;
+    letter-spacing: 2px;
+
+    color: #FBFBFB;
+
+    padding: 7px;
+}
+
+.header {
+    background: #fff;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    display: flex;
+    padding: 15px 15px 15px 11px;
+}
+
+.header__logo-link {
+    display: block;
+}
+
+.header__logo-image {
+    display: block;
+}
+
+.header__nav-list {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header__nav-link {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+
+    font-size: .933333333rem;
+    line-height: 1.5;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: #000000;
+
+    border-bottom: 1px solid transparent;
+}
+
+.header__nav-link:hover,
+.header__nav-link:focus {
+    color: #FF4A32;
+    border-bottom-color: currentColor;
+    outline: none;
+}
+
+.header__nav-list-item:not(:last-child) {
+    margin-right: 22px;
+}
+
+.header__links {
+    display: flex;
+}
+
+.header__link-img {
+    width: 17px;
+}
+
+.header__link {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+}
+
+.header__nav {
+    margin-left: 125px;
+    margin-right: auto;
+}
+
+.preamble {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url('img/firstBanner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    min-height: 800px;
+}
+
+.preamble__title {
+    margin: 53px 0 14px;
+
+    font-weight: normal;
+    font-size: 2.93333333rem;
+    line-height: 1.15;
+}
+
+.preamble__description {
+    margin-bottom: 22px;
+}
+
+.preamble__shops {
+    display: flex;
+    gap: 12px;
+}
+
+.preamble__shop {
+    flex: 1 0 auto;
+    min-width: 201px;
+
+    background: #FF4A32;
+    border-radius: 35px;
+
+    line-height: 1.46666667;
+
+    text-align: center;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.promo {
+    background-color: #000000;
+
+    display: flex;
+    justify-content: center;
+}
+
+.promo__wrapper {
+    max-width: 1200px;
+    min-height: 83px;
+    flex: 0 0 100%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
