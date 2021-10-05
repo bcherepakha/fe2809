@@ -203,3 +203,150 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
+.description {
+    display: flex;
+    flex-direction: column;
+    padding: 52px 10px 20px;
+    align-items: center;
+}
+
+.description__title {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.13333333rem;
+    line-height: 1.12;
+
+    color: #000000;
+
+    text-align: center;
+
+    width: 100%;
+    max-width: 685px;
+
+    margin: 0 0 17px;
+}
+
+.description__text {
+    width: 100%;
+    max-width: 685px;
+
+    line-height: 1.25;
+
+    text-align: center;
+
+    margin: 0 0 72px;
+
+    position: relative;
+}
+
+.description__text::after {
+    content: '';
+
+    position: absolute;
+    left: 50%;
+    bottom: -25px;
+
+    transform: translateX(-50%);
+
+    display: block;
+
+    width: 70px;
+    height: 2px;
+
+    background: #CFCFCF;
+}
+
+.description__shops {
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+}
+
+.description__shop {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin: 0 10px;
+    /* aspect-ratio: 1; */
+
+    height: 0;
+    padding-top: calc(50% - 20px);
+    box-sizing: content-box;
+
+    position: relative;
+
+    text-decoration: none;
+    color: #FFF;
+
+    overflow: hidden;
+}
+
+.description__shop::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: center center no-repeat;
+    background-size: cover;
+
+    z-index: 1;
+
+    transform: scale(1);
+    transition: transform .6s linear 0s;
+}
+
+.description__shop-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, .0);
+    transition: all .6s linear 0s;
+
+    will-change: background-color, transform;
+
+    transform: scale(1);
+
+    z-index: 2;
+}
+
+.description__shop-body :first-child {
+    font-size: 1.66666667rem;
+    line-height: 1.2;
+}
+
+.description__shop-body :last-child {
+    font-size: 1.2rem;
+    line-height: 1.3;
+}
+
+.description__shop--boards::before {
+    background-image: url('img/shop1.jpg');
+}
+
+.description__shop--revs::before {
+    background-image: url('img/shop2.jpg');
+}
+
+.description__shop:hover::before {
+    transform: scale(1.1);
+}
+
+.description__shop:hover .description__shop-body {
+    background-color: rgba(0, 0, 0, .4);
+    transform: scale(1.2);
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .things {
+            display: flex;
+            gap: 30px;
+        }
+
+        .thing {
+            flex: 1 0 0;
+            border: 1px solid red;
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .thing:hover img {
+            transform: scale(1.2);
+        }
+
+        .thing img {
+            transform: scale(1);
+            transition: transform .5s linear 0s;
+            width: 100%;
+        }
+
+        .thing__description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, .5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 3em;
+            color: #FFF;
+
+            transform: translateY(100%);
+            transition: transform .5s cubic-bezier(.41,1.05,.19,-1.51) 0s;
+        }
+
+        .thing:hover .thing__description {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="things">
+        <div class="thing">
+            <img src="https://static9.depositphotos.com/1011549/1208/i/600/depositphotos_12089121-stock-photo-green-apple-with-leaf.jpg" alt="">
+            <div class="thing__description">
+                Это Яблоко
+            </div>
+        </div>
+        <div class="thing">
+            <img src="https://static9.depositphotos.com/1011549/1208/i/600/depositphotos_12089121-stock-photo-green-apple-with-leaf.jpg" alt="">
+        </div>
+        <div class="thing">
+            <img src="https://static9.depositphotos.com/1011549/1208/i/600/depositphotos_12089121-stock-photo-green-apple-with-leaf.jpg" alt="">
+        </div>
+    </div>
+</body>
+</html>

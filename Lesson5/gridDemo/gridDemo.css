@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header,
+.footer {
+    padding: 25px 0;
+    background-color: #845ec2;
+    margin: 20px 0;
+}
+
+.nav {
+    margin: 20px 0;
+}
+
+.nav__container-item {
+    background-color: #d65db1;
+    padding: 10px;
+    border: 1px dashed #ffc75f;
+}
+
+.nav__container {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main__item {
+    padding: 0;
+    background-color: #ff6f91;
+    border: 1px dashed #2c73d2;
+}
+
+.main__item--a {
+    padding-top: 45%;
+    background-color: #ff9671;
+}
+
+.main__item--b {
+    padding-top: 45%;
+    background-color: #ffc75f;
+}
+
+.article__item {
+    padding: 25px 0;
+    background-color: #f9f871;
+    border: 1px dashed #008f7a;
+}
+
+/* GRID */
