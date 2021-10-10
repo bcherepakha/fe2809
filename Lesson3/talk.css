@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+}
+
+.header {
+    background-color: #F4F9E2;
+    min-height: 840px;
+
+    position: relative;
+}
+
+.header__decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 22.4773834%;
+    height: 100%;
+
+    background: #FFF;
+}
+
+.header__decoration::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 249.845201%;
+    padding-top: 168.708978%;
+    height: 0;
+
+    box-sizing: content-box;
+
+    background: #EDFDFF;
+    border-radius: 57.3821691%;
+    transform-origin: top right;
+    transform: translateY(-31.25%) translateX(-37.1747212%) rotate(-56.921268028739deg);
+}
+
+.header__decoration::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 249.845201%;
+    padding-top: 168.708978%;
+    height: 0;
+
+    box-sizing: content-box;
+
+    background: url("img/linkedin-sales-navigator-406825.jpg") center center no-repeat;
+    background-size: cover;
+    border-radius: 57.3821691%;
+    transform-origin: top right;
+    transform: translateY(-9.74264706%) translateX(-5.20446097%) rotate(-29deg);
+}
