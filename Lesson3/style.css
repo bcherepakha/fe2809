@@ -50,10 +50,12 @@ body {
 }
 
 .main {
-    background-color: cyan;
     flex-grow: 1535;
     flex-shrink: 0;
     flex-basis: 0;
+
+    box-sizing: border-box;
+    padding: 100px;
 }
 
 .aside {
@@ -237,4 +239,71 @@ body {
 .calendar__day a:focus {
     outline: none;
     background-color: rgba(60, 130, 249, 1);
+}
+
+.main {
+    --hour-height: 120px;
+    --left-space: 135px;
+}
+
+.main-body {
+    position: relative;
+}
+
+.hours {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hour {
+    flex-basis: var(--hour-height);
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-top: 2px solid #F3F3F3;
+    margin-left: var(--left-space);
+
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+.hour span {
+    position: absolute;
+    top: 0;
+    left: calc(-1*var(--left-space));
+
+    transform: translateY(-50%);
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.6rem;
+    line-height: 3rem;
+
+    color: #A4B0C3;
+}
+
+.event {
+    position: absolute;
+    top: 0;
+    left: var(--left-space);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 2.8rem;
+    line-height: 3.3rem;
+
+    width: calc(100% - var(--left-space));
+    padding-left: 75px;
+
+    box-sizing: border-box;
+
+    color: #243D6F;
+
+    background: rgba(61, 131, 249, 0.15);
+    border-left: 6px solid #3D83F9;
 }

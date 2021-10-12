@@ -142,6 +142,36 @@ body {
     margin-right: auto;
 }
 
+@media (max-width: 1080px) {
+    .header__logo-link {
+        order: 1;
+    }
+
+    .header__links {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .header__nav {
+        order: 3;
+        flex-basis: 100%;
+        margin: 0;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .header {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 750px) {
+    .header__nav {
+        display: none;
+    }
+}
+
 .preamble {
     display: flex;
     flex-direction: column;
@@ -153,6 +183,13 @@ body {
     background-size: cover;
 
     min-height: 800px;
+}
+
+@media (max-width: 960px) {
+    .preamble {
+        min-height: 80vh;
+        /* background-image: url('../Lesson4/img/1000x600.jpg'); */
+    }
 }
 
 .preamble__title {
