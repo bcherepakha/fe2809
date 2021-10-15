@@ -6,5 +6,4 @@
 
 ## Homework
 
-* [Simple layout, #7](./simpleLayout/readme.md)
 * [Grid garden](http://cssgridgarden.com/#ru)

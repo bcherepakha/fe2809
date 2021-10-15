@@ -49,3 +49,56 @@ body {
 }
 
 /* GRID */
+body {
+    padding: 0 20px;
+}
+
+.nav__container {
+    display: grid;
+    gap: 10px;
+}
+
+.main {
+    display: grid;
+    gap: 20px;
+}
+
+.article {
+    display: grid;
+    gap: 15px;
+}
+
+@media (min-width: 600px) {
+    .nav__container {
+        grid-template-columns: repeat(9, 1fr);
+    }
+
+    .main {
+        grid-template-columns: 8fr 8fr;
+        grid-template-areas:
+            "a a"
+            "b c"
+            "d d";
+    }
+
+    .main__item--a {
+        grid-area: a;
+    }
+
+    .article {
+        grid-area: d;
+
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .main {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "a b d" "a c d";
+    }
+
+    .article {
+        grid-template-columns: 1fr;
+    }
+}

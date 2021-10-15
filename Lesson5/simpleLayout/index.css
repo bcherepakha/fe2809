@@ -37,3 +37,38 @@
 }
 
 /* GRID */
+body {
+    display: grid;
+    grid-template-columns: [a] 100px [b] 65fr [c] 35fr [d];
+    grid-template-rows: [first] 100px [second] minmax(300px, 1fr) [third] 150px [fourth];
+    grid-template-areas:
+        "logo menu menu"
+        "news list nav"
+        "foot foot nav";
+    min-height: 100vh;
+    margin: 0;
+}
+
+.footer {
+    grid-area: foot;
+}
+
+.logo {
+    grid-area: logo;
+}
+
+.menu {
+    grid-area: menu;
+}
+
+.nav {
+    grid-area: nav;
+}
+
+.list {
+    grid-area: list;
+}
+
+.news {
+    grid-area: news;
+}
