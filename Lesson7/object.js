@@ -12,3 +12,21 @@
     9.  Измените в копии свойство name на Ivan.
     10. Сравните свойства этих двух обьектов и придумайте структуру данных для отображения их разницы.
 */
+
+let key = 'age';
+const o = {
+    name: 'Alexander',
+    group: 'fe2809',
+};
+const e = {};
+
+for (const propertyName in o) {
+    console.log( propertyName );
+    e[propertyName] = o[propertyName];
+}
+
+console.log({ e, o });
+
+e.name = 'Ilya';
+
+console.log({ e, o });

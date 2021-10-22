@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="task1.js"></script>
+    <!-- <script>
+        const num = prompt('Введите n', '15');
+
+        if (num === null) {
+            alert('Вы отказались вводить число');
+            throw new Error('Вы отказались вводить число');
+        }
+
+        const n = parseInt(num, 10);
+
+        if ( isNaN(n) ) {
+            alert('Вы ввели не число');
+            throw new Error('Вы ввели не число');
+        }
+
+        consoleSimpleNumbers(n);
+    </script> -->
+    <script>
+        let i = 1;
+        let next;
+
+        do {
+            console.log(i);
+
+            next = confirm('Продолжить?');
+
+            i = getNextSimpleNumber(i);
+        } while (next);
+
+    </script>
+</body>
+</html>
