@@ -48,16 +48,164 @@ const ANCESTRY_DATA = [
     {'name': 'Jacobus Bernardus van Brussel', 'sex': 'm', 'born': 1736, 'died': 1809, 'father': 'Jan van Brussel', 'mother': 'Elisabeth Haverbeke'}
 ];
 
-console.log( 'ANCESTRY_DATA', ANCESTRY_DATA );
+// ? console.log( 'ANCESTRY_DATA', ANCESTRY_DATA );
 
 /** Дана информация о людях ANCESTRY_DATA
  *
  * Используя этот набор данных, подсчитайте:
  *
- * среднюю разницу в возрасте между матерями и их детьми.
- * среднюю разницу между в возрасте между родителями
- * среднее количество детей в семье (in home)
- * средний возраст людей для каждого из столетий.
+ * ? 1. среднюю разницу в возрасте между матерями и их детьми.
+ * ? 2. среднюю разницу в возрасте между родителями
+ * ? 3. среднее количество детей в семье (in home)
+ * ? 4. средний возраст людей для каждого из столетий.
  * Назначаем столетию людей, беря их год смерти, деля его на 100 и округляя:
  * `Math.ceil(person.died / 100)`.
 */
+
+function getPeopleByName( name, data ) {
+    return data.find( function ( person ) {
+        return person.name === name;
+    } );
+}
+
+function getMother( name, data ) {
+    return data.find( function ( person ) {
+        return person.name === name && person.sex === 'f';
+    } );
+}
+
+function getAgeDiffBetwenMother( person, data ) {
+    if (!person.mother || !person.born) {
+        return null;
+    }
+
+    const mother = getMother( person.mother, data );
+
+    if (!mother || !mother.born) {
+        return null;
+    }
+
+    return person.born - mother.born;
+}
+
+function task1( data ) {
+    const ageDiffs = data
+        .map( function (person) {
+            return getAgeDiffBetwenMother( person, data );
+        })
+        .filter( function (el) {
+            return el !== null;
+        });
+    const ageSum = ageDiffs
+        .reduce(
+            function (sum, el) { return sum + el; },
+            0
+        );
+
+    return ageSum / ageDiffs.length;
+}
+
+console.log( getAgeDiffBetwenMother( getPeopleByName('Philibert Haverbeke', ANCESTRY_DATA), ANCESTRY_DATA) );
+console.log( 'среднюю разницу в возрасте между матерями и их детьми', task1(ANCESTRY_DATA) );
+
+function getFamilies( data ) {
+    // [family = {
+    //     id: mother.name + father.name,
+    //     mother,
+    //     father,
+    //     children
+    // }]
+
+    function getFamilyID( person ) {
+        return `${person.mother} + ${person.father}`;
+    }
+
+    return data
+        .reduce(
+            function (families, person) {
+                const familyID = getFamilyID( person );
+                let family = families.find( function( f ) {
+                    return f.id === familyID;
+                } );
+
+                if (family) {
+                    family.children.push(person);
+                } else {
+                    const newFamily = {
+                        id: familyID,
+                        mother: getPeopleByName(person.mother, data),
+                        father: getPeopleByName(person.father, data),
+                        children: [
+                            person
+                        ]
+                    }
+
+                    families.push( newFamily );
+                }
+
+                return families;
+            },
+            []
+        );
+}
+
+function getAverageValue( arr ) {
+    return arr.reduce( function (sum, el) { return sum + el; }, 0) / arr.length;
+}
+
+function task2( data ) {
+    const families = getFamilies( data )
+        .filter( function (family) {
+            return family.mother
+                && family.mother.born
+                && family.father
+                && family.father.born;
+        });
+    const ageDiffs = families
+        .map( function (family) {
+            return family.mother.born - family.father.born;
+        });
+
+    return getAverageValue(ageDiffs);
+}
+
+console.log( 'среднюю разницу в возрасте между родителями', task2( ANCESTRY_DATA ) );
+
+function getPersonCentury( person ) {
+    return Math.ceil(person.died / 100);
+}
+
+function getAge( person ) {
+    return person.died - person.born;
+}
+
+function task4( data ) {
+    const persons = data
+        .filter( function (person) {
+            return person.died && person.born;
+        });
+    const personsAgeByCenturies = persons
+        .reduce(
+            function (result, person) {
+                const century = getPersonCentury( person );
+                const age = getAge( person );
+
+                if (!result[century]) {
+                    result[century] = [];
+                }
+
+                result[century].push( age );
+
+                return result;
+            },
+            {}
+        );
+
+    for (const century in personsAgeByCenturies) {
+        personsAgeByCenturies[century] = getAverageValue(personsAgeByCenturies[century]);
+    }
+
+    return personsAgeByCenturies;
+}
+
+console.log( 'средний возраст людей для каждого из столетий', task4( ANCESTRY_DATA ));
