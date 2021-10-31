@@ -1,6 +1,12 @@
 const X = 'x';
 const O = '0';
 const EMPTY = ' ';
+const gameStatuses = {
+    NOT_STARTED: 'NOT_STARTED',
+    STARTED: 'STARTED',
+    ENDED: 'ENDED',
+    DRAWITEM: 'DRAWITEM',
+};
 
 const game = {
     board: [
@@ -9,6 +15,7 @@ const game = {
         [EMPTY, EMPTY, EMPTY]
     ],
     currentUser: X,
+    status: gameStatuses.NOT_STARTED,
     userBoardAction( e ) {
         // const cellEl = e.target.closest('.cross__board-item');
         const cellEl = e.currentTarget;
@@ -22,22 +29,100 @@ const game = {
         game.step(rowIndex, cellIndex);
     },
     step(rowIndex, cellIndex) {
-        if (game.board[rowIndex][cellIndex] !== EMPTY) {
+        if (game.status !== gameStatuses.STARTED
+            || game.board[rowIndex][cellIndex] !== EMPTY) {
             return false;
         }
 
         const currentUser = game.currentUser;
 
         game.board[rowIndex][cellIndex] = currentUser;
-        game.currentUser = currentUser === X ? O : X;
 
-        // if ( currentUser === X ) {
-        //     game.currentUser = O;
-        // } else {
-        //     game.currentUser = X;
+        game.status = gameStatuses.DRAWITEM;
+        game.fillCell(rowIndex, cellIndex, currentUser);
+
+        const winLine = game.findWinLine(currentUser);
+
+        if (winLine) {
+            // выдаем сообщение и завершаем игру
+            game.status = gameStatuses.ENDED;
+        } else {
+            // передаем ход
+            game.currentUser = currentUser === X ? O : X;
+        }
+    },
+    statusAlert() {
+        if (game.status === gameStatuses.ENDED) {
+            const currentUser = game.currentUser;
+
+            alert(`Выиграли ${currentUser === X ? 'крестики' : 'нолики'}`);
+        } else if (game.status === gameStatuses.DRAWITEM) {
+            game.status = gameStatuses.STARTED;
+        }
+    },
+    getLines() {
+        const lines = game.board.map(function (row, index) {
+            return {
+                items: row,
+                index,
+                type: 'row'
+            };
+        });
+
+        // add columns
+        for (let i=0; i < 3; i++) {
+            const column = {
+                type: 'column',
+                index: i,
+                items: [
+                    game.board[0][i],
+                    game.board[1][i],
+                    game.board[2][i]
+                ]
+            };
+
+            lines.push(column);
+        }
+
+        lines.push({
+            type: 'diagonal',
+            index: 0,
+            items: [
+                game.board[0][0],
+                game.board[1][1],
+                game.board[2][2]
+            ]
+        }, {
+            type: 'diagonal',
+            index: 1,
+            items: [
+                game.board[0][2],
+                game.board[1][1],
+                game.board[2][0]
+            ]
+        });
+
+        return lines;
+    },
+    isLineWin(line, symbol) {
+        // for (let num = 0; num < 3; num++) {
+        //     if (line.items[num] !== symbol) {
+        //         return false;
+        //     }
         // }
 
-        game.fillCell(rowIndex, cellIndex, currentUser);
+        // return true;
+        return line.items
+            .every(function (s) {
+                return s === symbol;
+            });
+    },
+    findWinLine(symbol) {
+        const lines = game.getLines();
+
+        return lines.find(function (line) {
+            return game.isLineWin(line, symbol);
+        });
     },
     create0() {
         const svgRoot = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -52,6 +137,8 @@ const game = {
         ellipseEl.setAttribute('cy', '40');
         ellipseEl.setAttribute('rx', '20');
         ellipseEl.setAttribute('ry', '30');
+
+        svgRoot.addEventListener('animationend', game.statusAlert);
 
         return svgRoot;
     },
@@ -77,7 +164,20 @@ const game = {
 
         svgRoot.append(line1, line2);
 
+        line2.addEventListener('animationend', game.statusAlert);
+
         return svgRoot;
+    },
+    start() {
+        game.board = [
+            [EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY]
+        ];
+        game.currentUser = X;
+        game.status = gameStatuses.STARTED;
+
+        game.render();
     },
     init() {
         const boardEl = document.querySelector('.cross__board');
@@ -95,6 +195,8 @@ const game = {
                 cell.addEventListener('click', game.userBoardAction);
             });
         }
+
+        game.status = gameStatuses.STARTED;
 
         // boardEl.addEventListener('click', game.userBoardAction);
     },
@@ -130,3 +232,9 @@ game.init();
 console.log( game );
 
 game.render();
+
+const startBtn = document.querySelector('.action--start');
+
+startBtn.addEventListener('click', function () {
+    game.start();
+})
