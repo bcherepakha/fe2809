@@ -16,17 +16,11 @@ const game = {
     ],
     currentUser: X,
     status: gameStatuses.NOT_STARTED,
-    userBoardAction( e ) {
-        // const cellEl = e.target.closest('.cross__board-item');
-        const cellEl = e.currentTarget;
-        const rowIndex = game.cells.findIndex(function (rowItems) {
-            return rowItems.includes(cellEl);
-        });
-        const cellIndex = game.cells[rowIndex].findIndex(function (cell) {
-            return cell === cellEl;
-        });
-
-        game.step(rowIndex, cellIndex);
+    userBoardAction( rowIndex, cellIndex ) {
+        //? LE = { rowIndex: 0, cellIndex: 1, action: f }
+        return function action(e) {
+            game.step(rowIndex, cellIndex);
+        }
     },
     step(rowIndex, cellIndex) {
         if (game.status !== gameStatuses.STARTED
@@ -192,7 +186,7 @@ const game = {
             game.cells.push( rowItems );
 
             rowItems.forEach(function (cell, cellIndex) {
-                cell.addEventListener('click', game.userBoardAction);
+                cell.addEventListener('click', game.userBoardAction(i, cellIndex) );
             });
         }
 
