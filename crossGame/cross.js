@@ -7,6 +7,7 @@ function createGame() {
         STARTED: 'STARTED',
         ENDED: 'ENDED',
         DRAWITEM: 'DRAWITEM',
+        ROBOTMOVE: 'ROBOTMOVE',
     };
 
     const game = {
@@ -15,7 +16,11 @@ function createGame() {
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]
         ],
+        steps: [],
         currentUser: X,
+        symbols: {
+            X, O, EMPTY
+        },
         status: gameStatuses.NOT_STARTED,
         userBoardAction( rowIndex, cellIndex ) {
             //? LE = { rowIndex: 0, cellIndex: 1, action: f }
@@ -23,13 +28,22 @@ function createGame() {
                 game.step(rowIndex, cellIndex);
             }
         },
+        setRobotMove() {
+            game.status = gameStatuses.ROBOTMOVE;
+        },
         step(rowIndex, cellIndex) {
-            if (game.status !== gameStatuses.STARTED
+            if (![gameStatuses.STARTED, gameStatuses.ROBOTMOVE].includes(game.status)
                 || game.board[rowIndex][cellIndex] !== EMPTY) {
                 return false;
             }
 
             const currentUser = game.currentUser;
+
+            game.steps.push({
+                currentUser,
+                rowIndex,
+                cellIndex,
+            });
 
             game.board[rowIndex][cellIndex] = currentUser;
 
@@ -53,6 +67,10 @@ function createGame() {
                 alert(`Выиграли ${currentUser === X ? 'крестики' : 'нолики'}`);
             } else if (game.status === gameStatuses.DRAWITEM) {
                 game.status = gameStatuses.STARTED;
+
+                if (game.conversation) {
+                    game.conversation( game );
+                }
             }
         },
         getLines() {
@@ -163,7 +181,8 @@ function createGame() {
 
             return svgRoot;
         },
-        start() {
+        start( conversation ) {
+            game.conversation = conversation;
             game.board = [
                 [EMPTY, EMPTY, EMPTY],
                 [EMPTY, EMPTY, EMPTY],
@@ -171,6 +190,7 @@ function createGame() {
             ];
             game.currentUser = X;
             game.status = gameStatuses.STARTED;
+            game.steps = [];
 
             game.render();
         },
@@ -233,8 +253,27 @@ function createGame() {
 
 const game = createGame(); // LE0 = { game }
 
-const startBtn = document.querySelector('.action--start');
+// const startBtn = document.querySelector('.action--start');
 
-startBtn.addEventListener('click', function () {
-    game.start();
-})
+// startBtn.addEventListener('click', function () {
+//     game.start();
+// })
+
+const optionsForm = document.querySelector('.actions');
+
+optionsForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const selectEl = optionsForm.elements.robotName;
+    const robotName = selectEl.value;
+
+    if (robotName !== 'human') {
+        const robot = new Robot(robotName);
+
+        console.log( robot );
+
+        game.start( robot.conversation.bind(robot) );
+    } else {
+        game.start();
+    }
+});
