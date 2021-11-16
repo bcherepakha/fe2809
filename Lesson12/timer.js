@@ -1,4 +1,5 @@
-function Timer(rootEl, options = {}) {
+export const a = 1;
+export function Timer(rootEl, options = {}) {
     this.rootEl = rootEl;
     this.options = options;
 
@@ -107,6 +108,14 @@ Timer.prototype.render = function () {
 
     this.timerEl.innerText = timeStr;
 }
+
+export default Timer;
+
+// module.exports = {
+//     a,
+//     Timer,
+//     default: Timer,
+// }
 
 // new Timer(
 //     document.querySelector('.timer'),

@@ -1,3 +1,5 @@
+import { Timer } from './timer.js';
+
 const places = document.querySelectorAll('.timer');
 const timers = Array.prototype.map.call(
     places,
