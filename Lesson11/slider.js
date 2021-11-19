@@ -1,5 +1,13 @@
 'use strict';
 
+function animationPause(el) {
+    el.style.animationPlayState = 'paused';
+}
+
+function animationStart(el) {
+    el.style.animationPlayState = 'running';
+}
+
 function Slider(rootSelector, loop = true) {
     this.rootSelector = rootSelector;
     this.loop = loop;
@@ -12,6 +20,16 @@ function Slider(rootSelector, loop = true) {
     this.nextBtn = this.rootEl.querySelector('.slider__next');
     this.playBtn = this.rootEl.querySelector('.slider__run');
     this.pauseBtn = this.rootEl.querySelector('.slider__stop');
+    this.timelineEl = this.rootEl.querySelector('.slider__timeline');
+
+    animationPause(this.timelineEl);
+
+    this.timelineEl.classList.add('animated');
+
+    // this.timelineEl.addEventListener('animationiteration', this.changeSlide.bind(this));
+    // this.bodyEl.addEventListener('transitionend', this.startTimer.bind(this));
+
+    this.waitAndGoNext();
 
     this.prevBtn.addEventListener('click', this.prev.bind(this));
 
@@ -22,6 +40,53 @@ function Slider(rootSelector, loop = true) {
     // if (effect === 'slide') {
     //     this.render = this.renderSlide;
     // }
+}
+
+Slider.prototype.waitForTimerEnd = function () {
+    return new Promise((resolve) => {
+        animationStart(this.timelineEl); //? this = ?
+
+        this.timelineEl.addEventListener(
+            'animationiteration',
+            resolve,
+            {
+                once: true
+            }
+        );
+    });
+}
+
+Slider.prototype.waitAndGoNext = function () {
+    this.waitForTimerEnd()
+        .then(() => animationPause(this.timelineEl))
+        .then(() => this.waitForSlideChange())
+        .then(() => this.waitAndGoNext())
+}
+
+Slider.prototype.waitForSlideChange = function () {
+    return new Promise((resolve) => {
+        this.next();
+
+        this.slides[this.currentSlide]
+            .addEventListener(
+                'transitionend',
+                resolve,
+                {
+                    once: true
+                }
+            );
+    });
+}
+
+Slider.prototype.startTimer = function (e) {
+    if (e.target.classList.contains('slider__current')) {
+        animationStart(this.timelineEl);
+    }
+}
+
+Slider.prototype.changeSlide = function () {
+    animationPause(this.timelineEl);
+    this.next();
 }
 
 Slider.prototype.prev = function () {
@@ -75,7 +140,7 @@ function SliderSlide(rootSelector, loop) {
 
 SliderSlide.prototype.__proto__ = Slider.prototype;
 
-Slider.prototype.prev = function () {
+SliderSlide.prototype.prev = function () {
     this.currentSlide = this.currentSlide - 1;
 
     if (this.currentSlide < 0) {
@@ -87,7 +152,7 @@ Slider.prototype.prev = function () {
     this.render();
 };
 
-Slider.prototype.next = function () {
+SliderSlide.prototype.next = function () {
     this.currentSlide++;
 
     if (this.currentSlide >= this.slides.length) {
@@ -127,7 +192,7 @@ SliderSlide.prototype.render = function () {
 }
 
 const slider1 = new Slider('.fade');
-const slider2 = new SliderSlide('.slide', false);
+// const slider2 = new SliderSlide('.slide', false);
 
 console.log( 'slider1', slider1 );
-console.log( 'slider2', slider2 );
+// console.log( 'slider2', slider2 );

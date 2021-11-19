@@ -9,6 +9,11 @@ export class List {
         this.rootEl.append( item.render() );
     }
 
+    removeItem(item) {
+        this.items = this.items.filter( el => el !== item );
+        item.destroy();
+    }
+
     addItems( items ) {
         this.items.push( ...items );
         // this.rootEl.append( ...items.map(t => t.render()));

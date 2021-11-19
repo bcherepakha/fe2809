@@ -1,9 +1,28 @@
 import EventSource from './EventSource.js';
 
+const DB_CLICK_TIME = 500;
+
+function dbClick(fn, time) {
+    let _lastCall = 0;
+
+    return function (e) {
+        const prevCall = _lastCall;
+
+        _lastCall = Date.now();
+
+        if (_lastCall - prevCall < time) {
+            _lastCall = 0;
+
+            return fn.call(this, e);
+        }
+    }
+}
+
 export class Task extends EventSource {
     constructor(taskData) {
         super();
         this.data = taskData;
+        this.edit = false;
         this.createElement();
     }
 
@@ -55,6 +74,9 @@ export class Task extends EventSource {
         }
 
         toggleCompletedEl.addEventListener('change', this.toggleHandler.bind(this));
+        destroyBtn.addEventListener('click', this.destroyHandler.bind(this));
+        taskTextEl.addEventListener('click', dbClick(this.textClickHandler.bind(this), DB_CLICK_TIME));
+        editEl.addEventListener('submit', this.changeText.bind(this));
 
         this.rootEl = rootEl;
         this.editTextEl = editTextEl;
@@ -62,8 +84,32 @@ export class Task extends EventSource {
         this.taskTextEl = taskTextEl;
     }
 
+    setEditMode( mode ) {
+        this.edit = mode;
+        this.render();
+    }
+
+    textClickHandler() {
+        this.edit = true;
+        this.render();
+    }
+
+    destroy() {
+        this.rootEl.remove();
+    }
+
+    destroyHandler() {
+        this.dispatch('destroy');
+    }
+
     toggleHandler(e) {
         this.dispatch('toggleCompleted');
+    }
+
+    changeText( e ) {
+        e.preventDefault();
+
+        this.dispatch('changetext', this.editTextEl.value );
     }
 
     render() {
@@ -75,6 +121,12 @@ export class Task extends EventSource {
             this.rootEl.classList.add('completed');
         } else {
             this.rootEl.classList.remove('completed');
+        }
+
+        if (this.edit) {
+            this.rootEl.classList.add('editing');
+        } else {
+            this.rootEl.classList.remove('editing');
         }
 
         return this.rootEl;
