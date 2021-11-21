@@ -23,7 +23,13 @@ export class Task extends EventSource {
         super();
         this.data = taskData;
         this.edit = false;
+        this.hidden = true;
         this.createElement();
+    }
+
+    setHidden(hidden) {
+        this.hidden = hidden;
+        this.render();
     }
 
     changeProps( newData ) {
@@ -128,6 +134,8 @@ export class Task extends EventSource {
         } else {
             this.rootEl.classList.remove('editing');
         }
+
+        this.rootEl.hidden = this.hidden;
 
         return this.rootEl;
     }

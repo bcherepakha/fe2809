@@ -2,15 +2,44 @@ import AddTaskForm from './AddTaskForm.js';
 import { Task } from './Task.js';
 import { List } from './List.js';
 import { Counter } from './Counter.js';
+import { Filter } from './Filter.js';
 
 const addTaskForm = new AddTaskForm( onCreateTask );
-const list = new List();
+const list = new List( isTaskShown );
 const counter = new Counter();
+const filter = new Filter();
+
+filter.addEventListener('change', onFilterChange);
 
 readFromLocalStorage();
 
+function onFilterChange() {
+    list.items.forEach(task => {
+        task.setHidden( isTaskHidden( task ) );
+    });
+
+    list.render();
+}
+
+function isTaskShown( task ) {
+    return !isTaskHidden( task );
+}
+
+function isTaskHidden( task ) {
+    switch (filter.value) {
+        case 'active':
+            return task.data.completed;
+        case 'completed':
+            return !task.data.completed;
+        default:
+            return false;
+    }
+}
+
 function createTask(taskData) {
     const task = new Task(taskData);
+
+    task.setHidden( isTaskHidden( task ) );
 
     task.addEventListener('toggleCompleted', onTaskToggle);
     task.addEventListener('destroy', onDestroy);

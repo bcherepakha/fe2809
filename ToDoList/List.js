@@ -1,11 +1,17 @@
 export class List {
-    constructor() {
+    constructor( isItemShown ) {
+        this.isItemShown = isItemShown;
         this.items = [];
         this.rootEl = document.querySelector('.todo-list');
     }
 
     addItem(item) {
         this.items.push(item);
+
+        if (this.isItemShown && !this.isItemShown(item)) {
+            return;
+        }
+
         this.rootEl.append( item.render() );
     }
 
@@ -16,12 +22,16 @@ export class List {
 
     addItems( items ) {
         this.items.push( ...items );
-        // this.rootEl.append( ...items.map(t => t.render()));
         this.render();
     }
 
     render() {
+        const shownItems = this.items
+            .filter(t => this.isItemShown ? this.isItemShown(t) : true);
+
         this.rootEl.innerText = '';
-        this.rootEl.append( ...this.items.map(t => t.render()) );
+        this.rootEl.append(
+            ...shownItems.map(t => t.render())
+        );
     }
 }
