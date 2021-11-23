@@ -6,18 +6,22 @@ export class List {
     }
 
     addItem(item) {
-        this.items.push(item);
+        this.items.unshift(item);
 
         if (this.isItemShown && !this.isItemShown(item)) {
             return;
         }
 
-        this.rootEl.append( item.render() );
+        this.rootEl.prepend( item.render() );
     }
 
     removeItem(item) {
         this.items = this.items.filter( el => el !== item );
         item.destroy();
+    }
+
+    clear() {
+        this.items = [];
     }
 
     addItems( items ) {

@@ -3,15 +3,19 @@ import { Task } from './Task.js';
 import { List } from './List.js';
 import { Counter } from './Counter.js';
 import { Filter } from './Filter.js';
+import { Server } from './server.js';
 
 const addTaskForm = new AddTaskForm( onCreateTask );
 const list = new List( isTaskShown );
 const counter = new Counter();
 const filter = new Filter();
+const api = new Server();
 
 filter.addEventListener('change', onFilterChange);
 
-readFromLocalStorage();
+// readFromLocalStorage();
+
+readFromServer();
 
 function onFilterChange() {
     list.items.forEach(task => {
@@ -49,38 +53,65 @@ function createTask(taskData) {
 }
 
 function onCreateTask(taskData) {
-    list.addItem( createTask(taskData) );
-    saveTasksToLocalStorage();
+    addTaskForm.setDisabled(true);
+
+    api.createTask( taskData )
+        .then(data => {
+            // list.addItem( createTask(data) );
+            list.clear();
+            return readFromServer();
+        }).then(() => {
+            // updateCounter();
+            addTaskForm.setDisabled(false);
+        });
+
+    // saveTasksToLocalStorage();
 }
 
 function onChangeText( e ) {
     const { target: task, data } = e;
 
-    task.changeProps({
+    api.updateTask({
+        ...task.data,
         text: data
+    }).then(data => {
+        task.changeProps(data);
+        task.setEditMode( false );
+        updateCounter();
+    }).catch(err => {
+        task.render();
     });
 
-    task.setEditMode( false );
-
-    saveTasksToLocalStorage();
+    // saveTasksToLocalStorage();
 }
 
-function onTaskToggle( e ) {
+async function onTaskToggle( e ) {
     const { target: task } = e;
 
-    task.changeProps({
-        completed: !task.data.completed
-    });
+    try {
+        const data = await api.updateTask({
+            ...task.data,
+            completed: !task.data.completed
+        });
 
-    saveTasksToLocalStorage();
+        task.changeProps(data);
+        updateCounter();
+    } catch(err) {
+        task.render();
+    }
+
+    // saveTasksToLocalStorage();
 }
 
-function onDestroy( e ) {
+async function onDestroy( e ) {
     const { target: task } = e;
+
+    await api.deleteTask( task.data.id );
 
     list.removeItem(task);
+    updateCounter();
 
-    saveTasksToLocalStorage();
+    // saveTasksToLocalStorage();
 }
 
 function saveTasksToLocalStorage() {
@@ -107,4 +138,14 @@ function updateCounter() {
         list.items.length,
         list.items.filter(t => t.data.completed).length
     );
+}
+
+function readFromServer() {
+    return api.getTasks()
+        .then(parsedTasks => {
+
+            list.addItems( parsedTasks.map(d => createTask(d)) );
+            updateCounter();
+
+        });
 }

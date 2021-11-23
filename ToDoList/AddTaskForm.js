@@ -22,4 +22,12 @@ export default class AddTaskForm {
             this.onCreateTask(task);
         }
     }
+
+    setDisabled( disabled ) {
+        if ( disabled ) {
+            this.rootEl.classList.add('disabled');
+        } else {
+            this.rootEl.classList.remove('disabled');
+        }
+    }
 }
