@@ -5,7 +5,7 @@ import { Counter } from './Counter.js';
 import { Filter } from './Filter.js';
 import { Server } from './server.js';
 
-const addTaskForm = new AddTaskForm( onCreateTask );
+const addTaskForm = new AddTaskForm( onCreateTask, onServerInput );
 const list = new List( isTaskShown );
 const counter = new Counter();
 const filter = new Filter();
@@ -50,6 +50,29 @@ function createTask(taskData) {
     task.addEventListener('changetext', onChangeText);
 
     return task;
+}
+
+function onLocalInput(value) {
+    list.items.forEach(task => {
+        task.setHidden(
+            !task.data.text
+                .toLowerCase()
+                .includes(
+                    value.toLowerCase()
+                    .trim()
+                )
+        );
+    });
+}
+
+function onServerInput(value) {
+    api.getTasks({ text: value })
+        .then((parsedTask) => {
+            if (addTaskForm.getTextValue() === value) {
+                list.clear();
+                list.addItems(parsedTask.map(createTask));
+            }
+        });
 }
 
 function onCreateTask(taskData) {

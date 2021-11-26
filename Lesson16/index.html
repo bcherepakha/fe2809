@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register {
+            border: 1px solid;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .register__label {
+            display: flex;
+            min-width: 350px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+        }
+
+        .register__label-title {
+            flex: 1 0 auto;
+        }
+
+        .register__input {
+            flex: 0 0 200px;
+        }
+
+        .register__label-error[hidden] {
+            display: none;
+        }
+
+        .register__label-error {
+            flex: 0 0 100%;
+            color: red;
+            max-width: 200px;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="register">
+        <label class="register__label">
+            <span class="register__label-title">Name:</span>
+            <input
+                class="register__input"
+                type="text"
+                name="name"
+                title="please use letters only" />
+            <span class="register__label-error"></span>
+        </label>
+        <label class="register__label">
+            <span class="register__label-title">Password:</span>
+            <input class="register__input" type="password" name="passwd"/>
+            <span class="register__label-error"></span>
+        </label>
+        <label class="register__label">
+            <span class="register__label-title">Repeat password:</span>
+            <input class="register__input" type="password" name="repeat_passwd"/>
+            <span class="register__label-error"></span>
+        </label>
+        <div>
+            <button type="submit">register</button>
+        </div>
+    </form>
+
+    <script>
+        const registerForm = document.querySelector('.register');
+        const nameField = registerForm.elements.name;
+        const passwdField = registerForm.elements.passwd;
+        const repeatField = registerForm.elements.repeat_passwd;
+        const nameErrorEl = findErrorEl(nameField);
+        const passwdErrorEl = findErrorEl(passwdField);
+        const repeatErrorEl = findErrorEl(repeatField);
+
+        registerForm.addEventListener('input', onSubmit);
+
+        function findErrorEl(el) {
+            return el.closest('.register__label').querySelector('.register__label-error');
+        }
+
+        function setError(el, message) {
+            el.innerText = message;
+            el.hidden = !message;
+        }
+
+        function onSubmit(e) {
+            e.preventDefault();
+
+            const name = nameField.value.trim();
+
+            if (!name || !/^[a-z]+\w+$/i.test(name)) {
+                nameErrorEl.innerText = 'Не правильное имя';
+                nameErrorEl.hidden = false;
+            } else {
+                nameErrorEl.innerText = '';
+                nameErrorEl.hidden = true;
+            }
+
+            if (passwdField.value !== repeatField.value) {
+                setError(repeatErrorEl, 'Повторите пароль');
+            } else {
+                setError(repeatErrorEl, '');
+            }
+        }
+    </script>
+</body>
+</html>

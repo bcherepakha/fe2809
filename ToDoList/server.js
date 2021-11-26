@@ -3,7 +3,7 @@ export class Server {
         this.base = 'https://5d9969125641430014051850.mockapi.io/tasks';
     }
 
-    getTasks(filter) {
+    getTasks({filter, text} = {}) {
         let url = `${this.base}?sortBy=id&order=desc`;
 
         switch (filter) {
@@ -13,6 +13,10 @@ export class Server {
             case 'completed':
                 url += `&completed=true`;
                 break;
+        }
+
+        if (text) {
+            url += `&text=${text.trim().toLowerCase()}`;
         }
 
         return fetch(url, {
