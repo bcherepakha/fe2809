@@ -26,7 +26,7 @@ var NR_SQUARES = 81; // Number of squares
 
 // Define difficulties by how many squares are given to the player in a new
 // puzzle.
-var DIFFICULTY = {
+export const DIFFICULTY = {
     'easy': 62,
     'medium': 53,
     'hard': 44,

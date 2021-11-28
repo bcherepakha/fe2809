@@ -7,9 +7,135 @@
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sudoku</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="modal.css">
     <script src="app.js" type="module"></script>
 </head>
 <!-- https://sudoku.com/ru -->
+    <div class="game">
+        <h1 class="game__title">Sudoku</h1>
+        <form class="game__settings">
+            <label>
+                <strong>Level:</strong>
+                <select name="complexity">
+                    <option value="62">easy</option>
+                    <option value="53">medium</option>
+                </select>
+            </label>
+            <button type="submit">Start new game</button>
+        </form>
+        <div class="game__board">
+            <div class="game__board-cell" data-editable="true" data-error="true">1</div>
+            <div class="game__board-cell" data-editable="false" data-error="true">2</div>
+            <div class="game__board-cell" data-active-number="true">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell" tabindex="0" data-active-cell="true">6</div>
+            <div class="game__board-cell" data-active-range="true">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+
+            <div class="game__board-cell">1</div>
+            <div class="game__board-cell">2</div>
+            <div class="game__board-cell">3</div>
+            <div class="game__board-cell">4</div>
+            <div class="game__board-cell">5</div>
+            <div class="game__board-cell">6</div>
+            <div class="game__board-cell">7</div>
+            <div class="game__board-cell">8</div>
+            <div class="game__board-cell">9</div>
+        </div>
+        <form class="game__keyboard">
+            <button class="game__keyboard-item">1</button>
+            <button class="game__keyboard-item">2</button>
+            <button class="game__keyboard-item">3</button>
+            <button class="game__keyboard-item">4</button>
+            <button class="game__keyboard-item">5</button>
+            <button class="game__keyboard-item">6</button>
+            <button class="game__keyboard-item">7</button>
+            <button class="game__keyboard-item">8</button>
+            <button class="game__keyboard-item">9</button>
+        </form>
+    </div>
+
+    <!-- <div class="modal">
+        <div class="modal__body">
+            <p>Хотите начать новую игру?</p>
+            <div class="modal__actions">
+                <button class="modal__action modal__action--yes">Да</button>
+                <button class="modal__action modal__action--no">Нет</button>
+            </div>
+        </div>
+    </div> -->
 <body>
 </body>
 

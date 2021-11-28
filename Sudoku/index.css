@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+}
+
+.game {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.game__title {
+    grid-column: span 2;
+    text-align: center;
+    margin: 0;
+}
+
+.game__settings {
+    grid-column: span 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.game__board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    box-sizing: border-box;
+    border: 1px solid #000;
+    aspect-ratio: 1;
+}
+
+.game__board-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    aspect-ratio: 1;
+
+    font-size: 2rem;
+
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+.game__board-cell:nth-child(-n+9),
+.game__board-cell:nth-child(n+28):nth-child(-n+36),
+.game__board-cell:nth-child(n+55):nth-child(-n+63) {
+    border-top-color: #000;
+}
+
+.game__board-cell:nth-child(3n+1){
+    border-left-color: #000;
+}
+
+.game__board-cell:nth-child(3n+3){
+    border-right-color: #000;
+}
+
+.game__board-cell:nth-child(n+19):nth-child(-n+27),
+.game__board-cell:nth-child(n+46):nth-child(-n+54),
+.game__board-cell:nth-child(n+73):nth-child(-n+81) {
+    border-bottom-color: #000;
+}
+
+.game__board-cell[data-editable="true"] {
+    color: #858df3;
+}
+
+.game__board-cell[data-editable="false"] {
+    color: #000;
+}
+
+.game__board-cell[data-error="true"][data-editable="true"] {
+    background-color: #f9b9b9;
+    color: #d00202;
+}
+
+.game__board-cell[data-error="true"][data-editable="false"] {
+    background-color: #f9b9b9;
+}
+
+.game__board-cell[data-active-value="true"] {
+    background-color: rgb(153, 215, 251, 0.32);
+    color: #1523ee;
+}
+
+.game__board-cell[data-active-range="true"] {
+    background-color: rgb(153, 215, 251, 0.52);
+}
+
+.game__board-cell[data-active-cell="true"] {
+    outline: -webkit-focus-ring-color auto 1px;
+}
+
+.game__board-cell[data-active-cell="true"],
+.game__board-cell[data-active-number="true"] {
+    background-color: #99d7fb;
+}
+
+.game__keyboard {
+    max-width: 300px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, 100px);
+}
+
+.game__keyboard-item {
+    aspect-ratio: 1;
+    font-size: 4rem;
+}
