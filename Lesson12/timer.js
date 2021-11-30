@@ -1,4 +1,3 @@
-export const a = 1;
 export function Timer(rootEl, options = {}) {
     this.rootEl = rootEl;
     this.options = options;
@@ -110,29 +109,3 @@ Timer.prototype.render = function () {
 }
 
 export default Timer;
-
-// module.exports = {
-//     a,
-//     Timer,
-//     default: Timer,
-// }
-
-// new Timer(
-//     document.querySelector('.timer'),
-//     { buttons: ['start', 'stop']}
-// );
-
-// new Timer(
-//     document.querySelector('.timer:nth-child(2)'),
-//     { buttons: ['start', 'pause', 'stop']}
-// );
-
-// const timer = new Timer(
-//     document.querySelector('.timer:nth-child(3)'),
-//     { buttons: [] }
-// );
-
-// // timer.start();
-// console.log(timer);
-// timer.start();
-// setTimeout(() => timer.stop(), 10000)
