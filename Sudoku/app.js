@@ -2,6 +2,7 @@ import { sudoku, DIFFICULTY } from './sudoku.core.js';
 import { Settings } from './settings.js';
 import { Board } from './board.js';
 import { Keyboard } from './keyboard.js';
+import Modal from './modal.js';
 
 const settings = new Settings( DIFFICULTY );
 const board = new Board();
@@ -36,12 +37,23 @@ function saveBoardInfo() {
 }
 
 function onStartGame() {
-    const boardStr = sudoku.generate(settings.complexity );
+    const modal = new Modal('Хотите начать новую игру?');
 
-    board.setValue( boardStr );
-    keyboard.setActive();
+    modal
+        .action('Yes', { ok: true }, () => {
+            const boardStr = sudoku.generate( settings.complexity );
 
-    saveBoardInfo();
+            board.setValue( boardStr );
+            keyboard.setActive();
+
+            saveBoardInfo();
+
+            modal.hide();
+        })
+        .action('No', { cancel: true })
+        .show();
+
+    console.log('modal', modal);
 }
 
 function onKeyPress(e) {
@@ -57,6 +69,13 @@ function onActivateCell() {
 
     saveBoardInfo();
 }
+
+document.addEventListener('keyup', function (e) {
+    if (e.which == 8) {
+        // NOTE: backspace pushed
+        board.pushKey( 'clear' );
+    }
+});
 
 document.addEventListener('keypress', function (e) {
     if ( !isNaN( parseInt(e.key, 10) ) ) {

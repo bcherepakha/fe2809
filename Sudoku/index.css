@@ -116,3 +116,8 @@ body {
     aspect-ratio: 1;
     font-size: 4rem;
 }
+
+.game__keyboard-item--long {
+    grid-column-start: span 2;
+    aspect-ratio: 2/1;
+}

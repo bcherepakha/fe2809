@@ -3,6 +3,9 @@ import { sudoku } from './sudoku.core.js';
 import EventSource from './eventSource.js';
 
 export class Board extends EventSource {
+    static BTN_CLEAR = 'clear';
+    static BTN_HELP = 'help';
+
     constructor() {
         super();
 
@@ -104,22 +107,41 @@ export class Board extends EventSource {
     }
 
     pushKey( number ) {
-        if (this.activeCell) {
-            const cellCandidates = this.getCurrentCellCandidates();
-            let hasError = !cellCandidates || !cellCandidates.includes(number);
+        if (this.activeCell && this.activeCell.editable) {
+            if (number === Board.BTN_CLEAR) {
+                this.activeCell.changeProps({
+                    value: '.',
+                    error: false
+                });
+            } else if (number === Board.BTN_HELP) {
+                const cellCandidates = this.getCurrentCellCandidates();
+                let randomCandidate;
 
-            try {
-                if (!hasError && !sudoku.solve( this.getBoard( number ) )) {
-                    hasError = true;
+                do {
+                    randomCandidate = cellCandidates[ Math.floor(Math.random() * cellCandidates.length) ];
+                } while( !sudoku.solve( this.getBoard( randomCandidate ) ) );
+
+                this.activeCell.changeProps({
+                    value: randomCandidate,
+                    error: false
+                });
+            } else {
+                const cellCandidates = this.getCurrentCellCandidates();
+                let hasError = !cellCandidates || !cellCandidates.includes(number);
+
+                try {
+                    if (!hasError && !sudoku.solve( this.getBoard( number ) )) {
+                        hasError = true;
+                    }
+                } catch (ex) {
+                    console.log( ex.message );
                 }
-            } catch (ex) {
-                console.log( ex.message );
-            }
 
-            this.activeCell.changeProps({
-                value: number,
-                error: hasError
-            });
+                this.activeCell.changeProps({
+                    value: number,
+                    error: hasError
+                });
+            }
 
             this.updateCandidates();
             this.render();

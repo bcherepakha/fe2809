@@ -11,7 +11,9 @@ export class Keyboard extends EventSource {
 
     setActive( keys = '123456789' ) {
         Array.prototype.forEach.call(this.rootEl.elements, (btn) => {
-            btn.disabled = !keys.includes(btn.value);
+            if ( !isNaN( parseInt(btn.value, 10) ) ) {
+                btn.disabled = !keys.includes(btn.value);
+            }
         });
     }
 

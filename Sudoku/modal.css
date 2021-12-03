@@ -20,6 +20,18 @@
     background: #fff;
     padding: 20px;
     border-radius: 20px;
+    animation: modal-show-body .4s linear 0s 1 normal forwards;
+}
+
+@keyframes modal-show-body {
+    from {
+        transform: translateY(-50vh) translateY(60%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .modal__actions {
